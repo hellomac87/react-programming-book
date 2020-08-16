@@ -37,3 +37,36 @@ foo = "foo";
 ```
 
 3. 재정의 가능
+
+### const, let
+
+const, let 은 블록 스코프를 가진다.
+
+```js
+if (true) {
+  const foo = "foo";
+}
+console.log(foo); // 참조 에러
+```
+
+const, let 또한 호이스팅된다. 하지만 변수를 정의하기 전에 변수를 사용하려고 하면 참조 에러가 발생한다.
+
+const 로 선언한 변수는 재할달되지 않는다.
+
+하지만 const 로 정의된 객체의 내부 속성값은 수정 가능하다.
+
+```js
+const bar = { prop1: "a" };
+bar.prop1 = "b";
+bar.prop2 = 123;
+console.log(bar); // {prop1 : 'b', prop2: 123};
+
+const arr = [10, 20];
+arr[0] = 100;
+arr.push(300);
+console.log(arr); // [100, 20, 300];
+```
+
+객체 내부의 속성값 수정도 불가능 하게 하고 싶다면 immer, immutable.js 등의 패키지 활용
+
+단지 수정을 차단하고 싶다면. `Object.freeze` `Object.seal` `Object.preventExtensions` 등의 내장 함수 활용
